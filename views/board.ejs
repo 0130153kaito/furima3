@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <html lang="ja">
+    <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+<body>
+    <%-include('nav') %>
+    <p class="text-right">
+        <%= login != undefined ? '"' + login.name + '" logined.' : '(not logined)' %> 
+    </p>
+    <h1 class="mt-3 mb-3">
+        <%= title %>
+    </h1>
+    <% if (login) { %>
+        <div class="board_form">
+            <form action="/board" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for='name'>名前</label>
+                    <input type="text" id="name" name="name" value="<%= login.name %>">
+                </div>
+                <div>
+                    <label for="message">本文</label>
+                    <textarea id="message" name="message"></textarea>
+                </div>
+                <div>
+                    <label for="flie_input">画像選択:</label>
+                    <input type="file" name="file_input" id="file_input">
+                </div>
+                <div>
+                    <button type="submit">投稿</button>
+                </div>
+            </form>
+        </div>
+    <% } %>
+    <div class="board">
+        <p><%= login.name %>さん、こんにちは。</p>
+        <% console.log(messages); %>
+        <% if (messages.length > 0) { %>
+            <ul>
+                <% for (let i in messages) { %>
+                    <li><%= messages[i].name %>:<%= messages[i].message %></li>
+                    <% if(messages[i].img!=null) { %>
+                        <img src="uploads/<%= messages[i].img %>" alt="画像" class="board_img">
+                    <% } %>
+                <% } %>
+            </ul>
+        <% } else { %>
+            <p>投稿はまだありません。</p>
+        <% } %>
+    </div>
+<%-include('./footer') %>

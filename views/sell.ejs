@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%-include('nav') %>
+    <p class="text-right">
+        <%= login != undefined ? '"' + login.name + '" logined.' : '(not logined)' %> 
+    </p>
+    <h2>商品登録画面</h2>
+    <form action="/sell" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">商品名</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="商品名を入力してください">
+      </div>
+      <div class="form-group">
+        <label for="price">価格</label>
+        <input type="number" class="form-control" id="price" name="price" placeholder="価格を入力してください">
+      </div>
+      <div class="form-group">
+        <label for="description">商品説明</label>
+        <input type="text" class="form-control" id="description" name="description" placeholder="商品説明を入力してください">
+      </div>
+      <div class="form-group">
+        <label for="Category">商品カテゴリー</label>
+        <input type="text" class="form-control" id="Category_1" name="Category_1" placeholder="商品カテゴリーを設定してください">
+        <input type="text" class="form-control" id="Category_2" name="Category_2" placeholder="商品カテゴリーを設定してください">
+        <input type="text" class="form-control" id="Category_3" name="Category_3" placeholder="商品カテゴリーを設定してください">
+      </div>
+      <div class="form-group">
+        <label for="image">商品画像</label>
+        <input type="file" class="form-control" id="image" name="image">
+      </div>
+      <button type="submit" class="btn btn-primary">登録</button>
+    </form>
+  </body>
+</html>
